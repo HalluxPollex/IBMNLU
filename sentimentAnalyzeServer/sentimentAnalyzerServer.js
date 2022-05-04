@@ -32,6 +32,7 @@ function getNLUInstance() {
         }),
         serviceUrl: api_url
     });
+    // console.log("Inside NLU "+naturalLanguageUnderstanding)
     return naturalLanguageUnderstanding;
 }
 
@@ -45,6 +46,7 @@ app.get("/",(req,res)=>{
 app.get("/url/emotion", (req,res) => {
     // //Extract the url passed from the client through the request object
     let urlToAnalyze = req.query.url
+    console.log(urlToAnalyze)
     const analyzeParams = 
         {
             "url": urlToAnalyze,
@@ -61,6 +63,7 @@ app.get("/url/emotion", (req,res) => {
      naturalLanguageUnderstanding.analyze(analyzeParams)
      .then(analysisResults => {
         //Please refer to the image to see the order of retrieval
+        console.log(analysisResults.result.keywords[0])
         return res.send(analysisResults.result.keywords[0].emotion,null,2);
      })
      .catch(err => {
@@ -71,6 +74,7 @@ app.get("/url/emotion", (req,res) => {
 //The endpoint for the webserver ending with /url/sentiment
 app.get("/url/sentiment", (req,res) => {
     let urlToAnalyze = req.query.url
+    console.log(urlToAnalyze)
     const analyzeParams = 
     {
         "url": urlToAnalyze,
@@ -87,7 +91,7 @@ app.get("/url/sentiment", (req,res) => {
     naturalLanguageUnderstanding.analyze(analyzeParams)
     .then(analysisResults => {
         //Retrieve the sentiment and return it as a formatted string
-
+        console.log(analysisResults.result.keywords[0])
         return res.send(analysisResults.result.keywords[0].sentiment,null,2);
     })
     .catch(err => {
@@ -98,6 +102,7 @@ app.get("/url/sentiment", (req,res) => {
 //The endpoint for the webserver ending with /text/emotion
 app.get("/text/emotion", (req,res) => {
     let textToAnalyze = req.query.text
+    console.log(textToAnalyze)
     const analyzeParams = 
     {
         "text": textToAnalyze,
@@ -114,7 +119,7 @@ app.get("/text/emotion", (req,res) => {
     naturalLanguageUnderstanding.analyze(analyzeParams)
     .then(analysisResults => {
         //Retrieve the emotion and return it as a formatted string
-
+        console.log(analysisResults.result.keywords[0])
         return res.send(analysisResults.result.keywords[0].emotion,null,2);
     })
     .catch(err => {
@@ -124,6 +129,7 @@ app.get("/text/emotion", (req,res) => {
 
 app.get("/text/sentiment", (req,res) => {
     let textToAnalyze = req.query.text
+    console.log(textToAnalyze)
     const analyzeParams = 
     {
         "text": textToAnalyze,
@@ -140,7 +146,7 @@ app.get("/text/sentiment", (req,res) => {
     naturalLanguageUnderstanding.analyze(analyzeParams)
     .then(analysisResults => {
         //Retrieve the sentiment and return it as a formatted string
-
+        console.log(analysisResults.result.keywords[0])
         return res.send(analysisResults.result.keywords[0].sentiment,null,2);
     })
     .catch(err => {

@@ -44,7 +44,9 @@ class App extends React.Component {
     url = url+"/" + mode + "/sentiment?"+ mode + "="+document.getElementById("textinput").value;
 
     fetch(url).then((response)=>{
+        console.log(response)
         response.json().then((data)=>{
+          console.log(data)
         this.setState({sentimentOutput:data.label});
         let output = data.label;
         let color = "white"
@@ -67,6 +69,7 @@ class App extends React.Component {
 
     fetch(url).then((response)=>{
       response.json().then((data)=>{
+        console.log(data)
       this.setState({sentimentOutput:<EmotionTable emotions={data}/>});
   })})  ;
   }
@@ -75,8 +78,8 @@ class App extends React.Component {
   render() {
     return (  
       <div className="App">
-      <button className="btn btn-info" onClick={()=>{this.renderOutput('text')}}>Text</button>
-        <button className="btn btn-dark"  onClick={()=>{this.renderOutput('url')}}>URL</button>
+      <button className="btn btn-info" onClick={()=>{this.renderOutput("text")}}>Text</button>
+        <button className="btn btn-dark"  onClick={()=>{this.renderOutput("url")}}>URL</button>
         <br/><br/>
         {this.state.innercomp}
         <br/>
